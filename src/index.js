@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import './style.css';
+import _ from "lodash";
+import "./style.css";
 
 // function mergeSort() {
-//     let 
+//     let
 // }
 
 // function merge() {
@@ -10,4 +10,4 @@ import './style.css';
 
 // }
 
-console.log('Project Binary Search Trees')
+console.log("Project Binary Search Trees");
