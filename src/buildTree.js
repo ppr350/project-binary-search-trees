@@ -20,9 +20,10 @@ function buildTree(arr) {
     // // console.log(mid, node, sortedArr)
     // node.left = buildTree(sortedArr)
     const root = parseInt((start + end) / 2)
+    console.log(sortedArr, root)
     const tree = new Tree(sortedArr, root)
-    tree.console()
+    tree.showInfo()
 }
 
 
-export { buildTree }
+// export { buildTree }
