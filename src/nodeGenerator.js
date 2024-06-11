@@ -2,7 +2,7 @@
 
 class Node {
     constructor(data) {
-        data
+        this.data = data
         this.left = null
         this.right = null
     }

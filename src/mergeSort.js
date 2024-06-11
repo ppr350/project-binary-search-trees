@@ -12,7 +12,7 @@ function merge(left, right) {
     let sortedArr = []
     while (left.length && right.length) {
         if (left[0] == right[0]) {
-            left.shift()
+            left.splice(0, 1)
         } else if (left[0] < right[0]) {
             sortedArr.push(left.shift())
         } else {
