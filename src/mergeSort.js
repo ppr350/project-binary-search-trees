@@ -22,5 +22,4 @@ function merge(left, right) {
     return [...sortedArr, ...left, ...right]
 }
 
-
 export { mergeSort }
