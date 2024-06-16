@@ -1,4 +1,5 @@
 // Build a Tree class/factory which accepts an array when initialized. The Tree class should have a root attribute, which uses the return value of buildTree
+import { takeWhile } from "lodash"
 import { Node } from "./nodeGenerator"
 
 class Tree {
@@ -25,30 +26,63 @@ class Tree {
 
     // Write an insert(data) that insert the given data
     insert(data) {
-        this.root = this.insertData(this.root, data)
+        this.root = this._insertData(this.root, data)
+        this.prettyPrint(this.root)
     }
 
-    insertData(root, data) {
+    _insertData(root, data) {
         if (root == null) {
             root = new Node(data)
             return root
         }
 
         if (data < root.data) {
-            root.left = this.insertData(root.left, data)
+            root.left = this._insertData(root.left, data)
         } else if (data > root.data) {
-            root.right = this.insertData(root.right, data)
+            root.right = this._insertData(root.right, data)
         }
+        // console.log(this.root)
+        return root
     }
     
     // Write a deleteItem(data) that delete the given data
-    deleteItem(data) {
+    delete(data) {
+        this.root = this._deleteData(this.root, data)
+        this.prettyPrint(this.root)
+    }
 
+    _deleteData(root, data) {
+        if (root == null) {
+            return root
+        }
+
+        if (data < root.data) {
+            root.left = this._deleteData(root.left, data)
+        } else if (data > root.data) {
+            root.right = this._deleteData(root.right, data)
+        } else {
+            if (root.left == null) {
+                return root.right
+            } else if (root.right == null) {
+                return root.left
+            }
+        }
+        return root
     }
 
     // Write a find(data) function that returns the node with the given data
     find(data) {
-
+        let root = this.root
+        while (root !== null) {
+            if (data < root.data) {
+                root = root.left
+            } else if (data > root.data) {
+                root = root.right
+            } else if (data === root.data) {
+                return root
+            }
+        }
+        return null
     }
 
     // Write a levelOrder(callback) that accepts an optional callback function as its parameter
