@@ -25,7 +25,20 @@ class Tree {
 
     // Write an insert(data) that insert the given data
     insert(data) {
+        this.root = this.insertData(this.root, data)
+    }
 
+    insertData(root, data) {
+        if (root == null) {
+            root = new Node(data)
+            return root
+        }
+
+        if (data < root.data) {
+            root.left = this.insertData(root.left, data)
+        } else if (data > root.data) {
+            root.right = this.insertData(root.right, data)
+        }
     }
     
     // Write a deleteItem(data) that delete the given data
