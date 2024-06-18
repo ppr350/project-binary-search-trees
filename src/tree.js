@@ -92,28 +92,102 @@ class Tree {
     // The method should return an array of values if no callback is given as an argument
     // Tip: You will want to to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list
     levelOrder(callback) {
-        
+        if (this.root == null) {
+            return []
+        }
+
+        const queue = [this.root]
+        const result = []
+
+        while (queue.length > 0) {
+            const node = queue.shift()
+            if (callback) {
+                callback(node)
+            } else {
+                result.push(node.data)
+            }
+
+            if (node.left != null) {
+                queue.push(node.left)
+            }
+            if (node.right != null) {
+                queue.push(node.right)
+            }
+        }
+        if (!callback) {
+            return result
+        }
     }
 
     // Write inOrder(callback), preOrder(callback), and postOrder(callback) functions that also accept an optional callback as a parameter
     // Each of these should traverse the tree in their respective depth-first order and yield each node to the provided callback
     // The functions should return an array of values if no callback is given as an argument
     inOrder(callback) {
+        let visit = this.root
+        let result = []
 
+        function callback(root) {
+            if (root == null) {
+                return
+            }
+
+            callback(root.left)
+            result.push(root.data)
+            callback(root.right)
+        }
+
+        callback(visit)
+        console.log(result) // Array(9) [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+        return result
     }
 
     preOrder(callback) {
+        let visit = this.root
+        let result = []
 
+        function callback(root) {
+            if (root == null) {
+                return
+            }
+
+            result.push(root.data)
+            callback(root.left)
+            callback(root.right)
+        }
+
+        callback(visit)
+        console.log(result) // Array(9) [ 5, 2, 1, 3, 4, 8, 6, 7, 9 ]
+        return result
     }
 
     postOrder(callback) {
+        let visit = this.root
+        let result = []
 
+        function callback(root) {
+            if (root == null) {
+                return
+            }
+
+            callback(root.left)
+            callback(root.right)
+            result.push(root.data)
+        }
+
+        callback(visit)
+        console.log(result) // Array(9) [ 1, 4, 3, 2, 7, 6, 9, 8, 5 ]
+        return result
     }
 
     // Write a height(node) function that returns the given node's height
     // Height is defined as the number of edges in the longest path from a given node to a leaf node
     height(node) {
-
+        if (node == null) 
+            return 0
+        const leftHeight = this.height(node.left)
+        const rightHeight = this.height(node.right)
+        console.log(Math.max(leftHeight, rightHeight) + 1)
+        return Math.max(leftHeight, rightHeight) + 1
     }
 
     // Write a depth(node) function that returns the given node's depth
