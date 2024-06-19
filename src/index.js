@@ -1,8 +1,11 @@
 import _ from "lodash";
 import "./style.css";
+import img from './BalancedBST.jpg'
 
 import { Tree } from "./tree";
 import { mergeSort } from "./mergeSort";
+
+const p = document.a
 
 console.log("Project Binary Search Trees")
 // const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
@@ -15,7 +18,7 @@ let newTree = new Tree(sortArr)
 
 newTree.insert(10)
 newTree.insert(11)
-// newTree.delete(10)
+newTree.delete(10)
 // newTree.levelOrder()
 // newTree.inOrder()
 // newTree.preOrder()

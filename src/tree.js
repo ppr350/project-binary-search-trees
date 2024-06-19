@@ -59,9 +59,9 @@ class Tree {
             return root
         }
 
-        if (data < root.data) {
+        if (root.data > data) {
             root.left = this._deleteData(root.left, data)
-        } else if (data > root.data) {
+        } else if (root.data < data) {
             root.right = this._deleteData(root.right, data)
         } else {
             if (root.left == null) {
