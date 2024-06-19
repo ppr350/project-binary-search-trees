@@ -9,17 +9,19 @@ class Tree {
         this.end = array.length
         this.root = this.buildTree(array, this.start, this.end - 1)
         this.print = this.prettyPrint(this.root)
+        console.log(this.root)
     }
 
     // Write a buildTree(array) function that takes an array of data and turns it into a balanced binary tree full of Node objects appropriately placed
     buildTree(array, start, end) {
-        console.log(array, start, end)
+        // base case
         if (start > end) {
             return null
         }
+
         const mid = parseInt((start + end) / 2)
         const node = new Node(array[mid])
-        node.left = this.buildTree(array, start, mid - 1)
+        node.left = this.buildTree(array, start, mid -1)
         node.right = this.buildTree(array, mid + 1, end)
         return node
     }
@@ -31,17 +33,17 @@ class Tree {
     }
 
     _insertData(root, data) {
+        // base case
         if (root == null) {
             root = new Node(data)
             return root
         }
 
-        if (data < root.data) {
+        if (root.data > data) {
             root.left = this._insertData(root.left, data)
-        } else if (data > root.data) {
+        } else if (root.data < data) {
             root.right = this._insertData(root.right, data)
         }
-        // console.log(this.root)
         return root
     }
     
@@ -52,6 +54,7 @@ class Tree {
     }
 
     _deleteData(root, data) {
+        // base case
         if (root == null) {
             return root
         }
