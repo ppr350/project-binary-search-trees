@@ -8,7 +8,7 @@ class Tree {
         this.start = 0
         this.end = array.length
         this.root = this.buildTree(array, this.start, this.end - 1)
-        this.print = this.prettyPrint(this.root)
+        // this.print = this.prettyPrint(this.root)
         console.log(this.root)
     }
 
@@ -54,23 +54,40 @@ class Tree {
     }
 
     _deleteData(root, data) {
-        // base case
+        // Base case
         if (root == null) {
             return root
         }
 
+        // If the data to be deleted is lesser than the root data, then it's in the left subtree
         if (root.data > data) {
             root.left = this._deleteData(root.left, data)
+        // If the data to deleted is greater than the root data, then it's in the right subtree
         } else if (root.data < data) {
             root.right = this._deleteData(root.right, data)
+        // If key is same as root data
         } else {
-            if (root.left == null) {
+            // Node with only one child or no child
+            if (root.left === null) {
                 return root.right
-            } else if (root.right == null) {
+            } else if (root.right === null) {
                 return root.left
             }
+            // Node with two children, we need to get the inorder successor (smallest in the right subtree)
+            root.data = this.minValue(root.right)
+            // Delete the inoder successor
+            root.right = this._deleteData(root.right, root.data)
         }
         return root
+    }
+
+    minValue(node) {
+        let minv = node.data
+        while (node.left !== null) {
+            minv = node.left.data
+            node = node.left
+        }
+        return minv
     }
 
     // Write a find(data) function that returns the node with the given data
@@ -94,13 +111,14 @@ class Tree {
     // levelOrder may be implemented using either iteration or recursion
     // The method should return an array of values if no callback is given as an argument
     // Tip: You will want to to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list
-    levelOrder(callback) {
+    levelOrder(callback) { // Breadth First Search
         if (this.root == null) {
             return []
         }
 
         const queue = [this.root]
         const result = []
+        console.log(result)
 
         while (queue.length > 0) {
             const node = queue.shift()
