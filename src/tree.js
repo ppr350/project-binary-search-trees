@@ -99,6 +99,7 @@ class Tree {
             } else if (data > root.data) {
                 root = root.right
             } else if (data === root.data) {
+                console.log(`found ${data}`)
                 return root
             }
         }
@@ -144,27 +145,42 @@ class Tree {
     // Each of these should traverse the tree in their respective depth-first order and yield each node to the provided callback
     // The functions should return an array of values if no callback is given as an argument
     inOrder(callback) {
-        let visit = this.root
-        let result = []
+        if (this.root == null) {
+            return
+        }
+        console.log(this.root)
 
-        function callback(root) {
-            if (root == null) {
-                return
-            }
-
+        const visit = this.root
+        const result = []
+        while (visit.length > 0) {
             callback(root.left)
             result.push(root.data)
             callback(root.right)
         }
-
+        console.log(result)
         callback(visit)
-        console.log(result) // Array(9) [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
         return result
+        // const visit = this.root
+        // const result = []
+
+        // function callback(root) {
+        //     if (root == null) {
+        //         return
+        //     }
+
+        //     callback(root.left)
+        //     result.push(root.data)
+        //     callback(root.right)
+        // }
+
+        // callback(visit)
+        // console.log(result) // Array(9) [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+        // return result
     }
 
     preOrder(callback) {
-        let visit = this.root
-        let result = []
+        const visit = this.root
+        const result = []
 
         function callback(root) {
             if (root == null) {
@@ -182,8 +198,8 @@ class Tree {
     }
 
     postOrder(callback) {
-        let visit = this.root
-        let result = []
+        const visit = this.root
+        const result = []
 
         function callback(root) {
             if (root == null) {

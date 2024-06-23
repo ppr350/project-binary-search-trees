@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _, { find } from "lodash";
 import "./style.css";
 import balancedBST from './BalancedBST.jpg'
 
@@ -25,8 +25,11 @@ let newTree = new Tree(sortArr)
 // newTree.insert(11)
 // newTree.delete(4)
 // newTree.delete(5)
-newTree.levelOrder()
-// newTree.inOrder()
+// newTree.levelOrder()
+// newTree.levelOrder(function(node) {
+//     console.log(node.data)
+// })
+newTree.inOrder()
 // newTree.preOrder()
 // newTree.postOrder()
 // newTree.height(4)
