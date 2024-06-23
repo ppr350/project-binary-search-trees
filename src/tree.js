@@ -2,6 +2,7 @@
 import { takeWhile } from "lodash"
 import { Node } from "./nodeGenerator"
 
+
 class Tree {
     constructor(array) {
 
@@ -119,7 +120,7 @@ class Tree {
 
         const queue = [this.root]
         const result = []
-        console.log(result)
+        // console.log(result)
 
         while (queue.length > 0) {
             const node = queue.shift()
@@ -149,17 +150,19 @@ class Tree {
             return
         }
         console.log(this.root)
-
-        const visit = this.root
+        const visit = [this.root]
         const result = []
+
         while (visit.length > 0) {
-            callback(root.left)
-            result.push(root.data)
-            callback(root.right)
+            const node = visit.shift()
+            if (callback) {
+                callback(node)
+            } else {
+                result.push(visit.data)
+            }
         }
-        console.log(result)
-        callback(visit)
-        return result
+
+
         // const visit = this.root
         // const result = []
 
