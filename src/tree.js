@@ -2,7 +2,6 @@
 import { takeWhile } from "lodash"
 import { Node } from "./nodeGenerator"
 
-
 class Tree {
     constructor(array) {
 
@@ -10,7 +9,7 @@ class Tree {
         this.end = array.length
         this.root = this.buildTree(array, this.start, this.end - 1)
         // this.print = this.prettyPrint(this.root)
-        console.log(this.root)
+        // console.log(this.root)
     }
 
     // Write a buildTree(array) function that takes an array of data and turns it into a balanced binary tree full of Node objects appropriately placed
@@ -145,77 +144,49 @@ class Tree {
     // Write inOrder(callback), preOrder(callback), and postOrder(callback) functions that also accept an optional callback as a parameter
     // Each of these should traverse the tree in their respective depth-first order and yield each node to the provided callback
     // The functions should return an array of values if no callback is given as an argument
-    inOrder(callback) {
-        if (this.root == null) {
+    inOrder(callback, node = this.root, result = []) {
+        if (node == null) {
             return
         }
-        console.log(this.root)
-        const visit = [this.root]
-        const result = []
 
-        while (visit.length > 0) {
-            const node = visit.shift()
-            if (callback) {
-                callback(node)
-            } else {
-                result.push(visit.data)
-            }
+        this.inOrder(callback, node.left, result)
+        if (callback) {
+            callback(node)
         }
-
-
-        // const visit = this.root
-        // const result = []
-
-        // function callback(root) {
-        //     if (root == null) {
-        //         return
-        //     }
-
-        //     callback(root.left)
-        //     result.push(root.data)
-        //     callback(root.right)
-        // }
-
-        // callback(visit)
-        // console.log(result) // Array(9) [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-        // return result
-    }
-
-    preOrder(callback) {
-        const visit = this.root
-        const result = []
-
-        function callback(root) {
-            if (root == null) {
-                return
-            }
-
-            result.push(root.data)
-            callback(root.left)
-            callback(root.right)
-        }
-
-        callback(visit)
-        console.log(result) // Array(9) [ 5, 2, 1, 3, 4, 8, 6, 7, 9 ]
+        result.push(node.data)
+        this.inOrder(callback, node.right, result)
+        // console.log(result) // Array(10) [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
         return result
     }
 
-    postOrder(callback) {
-        const visit = this.root
-        const result = []
-
-        function callback(root) {
-            if (root == null) {
-                return
-            }
-
-            callback(root.left)
-            callback(root.right)
-            result.push(root.data)
+    preOrder(callback, node = this.root, result = []) {
+        if (node == null) {
+            return
         }
 
-        callback(visit)
-        console.log(result) // Array(9) [ 1, 4, 3, 2, 7, 6, 9, 8, 5 ]
+        if (callback) {
+            callback(node)
+        }
+        result.push(node.data)
+        this.preOrder(callback, node.left, result)
+        this.preOrder(callback, node.right, result)
+        // console.log(result) // Array(10) [ 5, 2, 1, 3, 4, 8, 6, 7, 9, 10 ]
+        return result
+    }
+
+    postOrder(callback, node = this.root, result = []) {
+        if (node == null) {
+            return
+        }
+
+        this.postOrder(callback, node.left, result)
+        this.postOrder(callback, node.right, result)
+        if (callback) {
+            callback(node)
+        }
+        result.push(node.data)
+
+        // console.log(result) // Array(10) [ 1, 4, 3, 2, 7, 6, 10, 9, 8, 5 ]
         return result
     }
 
@@ -223,11 +194,11 @@ class Tree {
     // Height is defined as the number of edges in the longest path from a given node to a leaf node
     height(node) {
         if (node == null) 
-            return 0
-        const leftHeight = this.height(node.left)
-        const rightHeight = this.height(node.right)
-        console.log(Math.max(leftHeight, rightHeight) + 1)
-        return Math.max(leftHeight, rightHeight) + 1
+            return -1
+        const leftHeight = this.height(node.left);
+        const rightHeight = this.height(node.right);
+        // console.log(Math.max(leftHeight, rightHeight) + 1)
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
     // Write a depth(node) function that returns the given node's depth

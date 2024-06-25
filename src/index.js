@@ -30,6 +30,14 @@ newTree.levelOrder()
 //     console.log(node.data)
 // })
 newTree.inOrder()
+// newTree.inOrder(function(node) {
+//     console.log(node.data)
+// })
+// newTree.preOrder(function(node) {
+//     console.log(node.data)
+// })
 // newTree.preOrder()
 // newTree.postOrder()
-// newTree.height(4)
+newTree.height(1)
+console.log(" height of binary tree using recursive approach is ",
+    newTree.height(4)); 
