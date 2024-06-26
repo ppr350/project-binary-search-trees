@@ -38,6 +38,8 @@ newTree.inOrder()
 // })
 // newTree.preOrder()
 // newTree.postOrder()
-newTree.height(1)
-console.log(" height of binary tree using recursive approach is ",
-    newTree.height(4)); 
+// newTree.height(1)
+// console.log(" height of binary tree using recursive approach is ",
+//     newTree.height(3)); 
+// newTree.depth(2)
+console.log(newTree.isBalanced(5))

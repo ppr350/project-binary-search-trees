@@ -8,7 +8,7 @@ class Tree {
         this.start = 0
         this.end = array.length
         this.root = this.buildTree(array, this.start, this.end - 1)
-        // this.print = this.prettyPrint(this.root)
+        this.print = this.prettyPrint(this.root)
         // console.log(this.root)
     }
 
@@ -197,20 +197,50 @@ class Tree {
             return -1
         const leftHeight = this.height(node.left);
         const rightHeight = this.height(node.right);
-        // console.log(Math.max(leftHeight, rightHeight) + 1)
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
     // Write a depth(node) function that returns the given node's depth
     // Depth is defines as the number of edges in the path from a given node to the tree's root node
-    depth(node) {
+    depth(root, x) {
+        // Base case
+        if (root == null)
+            return -1;
 
+        // Initialize distance as -1
+        var dist = -1;
+
+        // Check if x is current node=
+        if ((root.data == x)|| 
+
+            // Otherwise, check if x is
+            // present in the left subtree
+            (dist = findDepth(root.left, x)) >= 0 || 
+            
+            // Otherwise, check if x is
+            // present in the right subtree
+            (dist = findDepth(root.right, x)) >= 0)
+
+            // Return depth of the node
+            return dist + 1;
+            
+        return dist;
     }
 
     // Write an isBalanced function that checks if the tree is balanced
     // A balanced tree is one where the difference between heights of the left subtree and the right subtree of every node is not more than 1
-    isBalanced() {
-
+    isBalanced(root) {
+        if (root == null) {
+            console.log('empty tree')
+            return true
+        }
+        const leftHeight = this.height(root.left)
+        const rightHeight = this.height(root.right)
+        const heightDiff = Math.abs(leftHeight - rightHeight)
+        if (heightDiff > 1) {
+            return false
+        }
+        return this.isBalanced(root.left) && this.isBalanced(root.right)
     }
 
     // Write a rebalance function that rebalances an unbalanced tree
