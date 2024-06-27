@@ -4,18 +4,6 @@
 This is a project to create JavaScript Binary Search Tree. It has several useful methods to add data, traverse the tree, find data, re-organise the tree etc.
 
 A binary search tree is a data structure used in computer science for sorting and storing data in a sorted manner. Each node’s left child has a lower value, and Rach node’s right child has a higher value. An advantage of using Binary Search Trees is speed when carry out operations such as search, delete and insert.
-
-An example of Binary Search Tree:
-
-				15
-               /  \
-              /    \
-	  	    8       18
-		   / \     /  \
-		  3   9   16   20
-				  /
-				 19
-
 - The size of a tree is the number of nodes in it (n).
 - A subtree starts from one of the nodes in the tree as a local root, and consists of that and all its descendants.
 - The descendants of a node are all the child nodes of that node, and all their child nodes.
